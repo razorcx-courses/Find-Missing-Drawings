@@ -1,0 +1,502 @@
+﻿<Window x:Class="RazorCX.FindMissingDrawings.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:viewModels="clr-namespace:RazorCX.FindMissingDrawings.ViewModels"
+        xmlns:web="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Width="515"
+        Height="700"
+        MaxWidth="515"
+        Icon="pack://application:,,,/Resources/RazorCX-Logo-50x50.ico"
+        Title="{Binding Title}"
+        Topmost="True">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Razor Viewer"
+                          Command="{Binding SolidSteelViewerCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/Graphics3D_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Design Connection"
+                          Command="{Binding DesignConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/SwitchToDesignMode_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Insert Connection"
+                          Command="{Binding InsertConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/ChangeQueryInsertValue_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Modify Connection"
+                          Command="{Binding ModifyConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/ChangeQueryInsertResults_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete Connection"
+                          Command="{Binding DeleteConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/ChangeQueryDeleteQuery_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Check Connection(s)"
+                          Command="{Binding CheckConnectionsCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/DynamicValidator_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Label"
+                          Command="{Binding LabelConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/Label_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Zoom"
+                          Command="{Binding ZoomConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <!--<Image Width="16" Height="16" Source ="{Binding Source={x:Static p:Resources.Zoom_16x}}" />-->
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/Zoom_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Connect Selected"
+                          Command="{Binding ConnectSelectedCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/SelectColumn_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Connect All"
+                          Command="{Binding ConnectAllCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/SelectCell_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Refresh Joints"
+                          Command="{Binding RefreshJointsCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/ProjectSystemModelRefresh_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Open Joint Report"
+                          Command="{Binding OpenJointReportCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/OpenfileDialog_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save Joint Report"
+                          Command="{Binding SaveJointReportCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/Save_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Find Joints"
+                          Command="{Binding FindJointsCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/FindSymbol_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Select Part"
+                          Command="{Binding SelectPartCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/SelectObject_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <!--<MenuItem Header="Toggle Sec1 Data" Command="{Binding Sec1VisibleToggleCommand}">
+					-->
+                <!--<MenuItem.Icon>
+						<StackPanel>
+							<Image Width="16" Height="16" Source="../Resources/SelectObject_16x.png" />
+						</StackPanel>
+					</MenuItem.Icon>-->
+                <!--
+				</MenuItem>-->
+                <MenuItem Header="Check Connection"
+                          Command="{Binding CheckConnectionCommand}">
+                    <MenuItem.Icon>
+                        <StackPanel>
+                            <Image Width="16"
+                                   Height="16"
+                                   Source="../Resources/SelectObject_16x.png" />
+                        </StackPanel>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+            </ContextMenu>
+        </Grid.ContextMenu>
+
+        <DockPanel Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="3"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch"
+                   Background="#444">
+            <Label DockPanel.Dock="Left"
+                   Foreground="White"
+                   FontSize="24"
+                   Content="{Binding AppLabel}"></Label>
+            <Label DockPanel.Dock="Right"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Foreground="White"
+                   FontSize="12"
+                   Content="{Binding Filename}"></Label>
+        </DockPanel>
+        <DockPanel Grid.Column="0"
+                   Grid.Row="1"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch">
+            <StackPanel Background="DarkGray">
+            </StackPanel>
+        </DockPanel>
+        <DockPanel Grid.Column="0"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="3"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch"
+                   Background="DarkGray">
+            <StackPanel HorizontalAlignment="Center"
+                        Orientation="Vertical"
+                        Margin="8">
+                <Button VerticalAlignment="Bottom"
+                        Height="30"
+                        FontSize="12"
+                        Width="300"
+                        Background="LightGreen"
+                        Command="{Binding FindMissingDrawingsCommand}"
+                        Content="Find Missing Drawings"></Button>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock FontSize="30"
+                       Margin="0,0,0,10"
+                       Visibility="{Binding IsMessageVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                       VerticalAlignment="Center"
+                       Text="{Binding Message}"></TextBlock>
+            <fa:ImageAwesome Icon="Refresh"
+                             Spin="True"
+                             Height="40"
+                             Width="48"
+                             Visibility="{Binding IsSpinnerVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+        </StackPanel>
+        <!--<StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="2"
+		            Background="Black">
+			<FlowDocumentScrollViewer  FontSize="12" Margin="0,0,0,0" Visibility="{Binding IsMessageVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+		          Document="{Binding StatusLogRichText}" Background="Black" Foreground="White"
+		          VerticalContentAlignment="Top"  
+		          ScrollViewer.VerticalScrollBarVisibility="Visible"
+		          ScrollViewer.CanContentScroll="True" MaxHeight="400"
+		          >
+			</FlowDocumentScrollViewer>
+		</StackPanel>-->
+        <DockPanel Grid.Column="0"
+                   Grid.Row="2"
+                   Grid.ColumnSpan="3">
+            <DataGrid x:Name="DataGrid"
+                      ItemsSource="{Binding PartSummaries, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                      Visibility="{Binding IsDataGridVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                      SelectionMode="Extended"
+                      SelectedItem="{Binding SelectedRow, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                      AlternatingRowBackground="LightGoldenrodYellow"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="LightGray"
+                      SelectedValuePath="PrimaryId"
+                      SelectedValue="{Binding SelectedValue, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                      RowHeaderWidth="0">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background"
+                                Value="#444" />
+                        <Setter Property="Foreground"
+                                Value="White" />
+                        <Setter Property="Padding"
+                                Value="6" />
+                    </Style>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=DisplayColor}"
+                                         Value="true">
+                                <Setter Property="Background"
+                                        Value="#ddd" />
+                                <Setter Property="Foreground"
+                                        Value="Black" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                        <Setter Property="Height"
+                                Value="27" />
+                        <Setter Property="VerticalContentAlignment"
+                                Value="Center" />
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Phase"
+                                            Width="65">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Phase}"
+                                           HorizontalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Phase"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Path=Phase}"
+                                        Width="65"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Mark"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Path=Mark}"
+                                        Width="100"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Name"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Path=Name}"
+                                        Width="135"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Material"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Path=Material}"
+                                        Width="197"></DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="IsSelected"
+                                Value="{Binding IsSelected, Mode=TwoWay}" />
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
+                                               CommandParameter="{Binding ElementName=DataGrid}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="CellEditEnding">
+                        <i:InvokeCommandAction Command="{Binding CellEditEndingCommand}"
+                                               CommandParameter="{Binding ElementName=DataGrid}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="SelectedCellsChanged">
+                        <i:InvokeCommandAction Command="{Binding JointRowSelectedCommand}"
+                                               CommandParameter="{Binding ElementName=DataGrid}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </DataGrid>
+            <!--<ListView Height="100" DockPanel.Dock="Bottom">ListView</ListView>-->
+        </DockPanel>
+        <DockPanel Grid.Column="0"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="3"
+                   VerticalAlignment="Stretch"
+                   Background="DarkGray">
+            <StackPanel Orientation="Horizontal"
+                        Margin="8"
+                        HorizontalAlignment="Center">
+                <Button VerticalAlignment="Bottom"
+                        Height="30"
+                        FontSize="12"
+                        Width="300"
+                        Background="RoyalBlue"
+                        Foreground="White"
+                        Command="{Binding ZoomSelectedCommand}"
+                        Content="{Binding ZoomSelectedQty}"></Button>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel Grid.Column="0"
+                   Grid.Row="4"
+                   Grid.ColumnSpan="3"
+                   HorizontalAlignment="Stretch"
+                   Background="White"
+                   VerticalAlignment="Stretch">
+            <StackPanel DockPanel.Dock="Left"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+
+                <Label FontSize="12"
+                       Width="70"
+                       HorizontalContentAlignment="Right"
+                       VerticalContentAlignment="Center"
+                       Content="Assemblies"
+                       Margin="5,0,0,0"></Label>
+                <Button Background="LightGreen"
+                        HorizontalContentAlignment="Center"
+                        FontSize="14"
+                        Width="40"
+                        HorizontalAlignment="Left"
+                        Content="{Binding MissingAssemblyDrawings}"
+                        Command="{Binding MissingAssemblyDrawingsCommand}"></Button>
+
+                <Label FontSize="12"
+                       Width="40"
+                       HorizontalContentAlignment="Right"
+                       VerticalContentAlignment="Center"
+                       Content="Parts"></Label>
+                <Button Background="LightSalmon"
+                        HorizontalContentAlignment="Center"
+                        FontSize="14"
+                        Width="40"
+                        HorizontalAlignment="Left"
+                        Content="{Binding MissingPartDrawings}"
+                        Command="{Binding MissingPartDrawingsCommand}"></Button>
+
+                <Button Command="{Binding RefreshCommand}"
+                        Padding="3"
+                        Margin="20,0,5,0"
+                        FontSize="12"
+                        Height="30"
+                        Background="Transparent"
+                        BorderThickness="0">
+                    <Image Source="../Resources/ProjectSystemModelRefresh_16x.png" />
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold">Refresh</TextBlock>
+                                <TextBlock>Refresh Colored Parts</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <ComboBox Margin="20,0,0,0"
+                          Width="70"
+                          ItemsSource="{Binding Phases}"
+                          SelectedValue="{Binding SelectedPhaseValue}"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Left">
+                </ComboBox>
+                <ComboBox Margin="10,0,0,0"
+                          Width="140"
+                          ItemsSource="{Binding MaterialTypes}"
+                          SelectedValue="{Binding SelectedMaterialTypeValue}"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Left">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel  DockPanel.Dock="Left"
+                         Orientation="Horizontal"
+                         VerticalAlignment="Center">
+            </StackPanel>
+        </DockPanel>
+        <DockPanel Grid.Column="0"
+                   Grid.Row="5"
+                   Grid.ColumnSpan="3">
+            <StatusBar FontSize="12"
+                       Background="#444"
+                       Foreground="White">
+                <!--<StatusBarItem Padding="0">
+					<Label Content="Status:" Foreground="White"></Label>
+				</StatusBarItem>-->
+                <StatusBarItem Padding="0">
+                    <Label Content="{Binding Status}"
+                           Foreground="White"></Label>
+                </StatusBarItem>
+                <StatusBarItem Padding="0"
+                               Margin="0,0,5,0"
+                               HorizontalAlignment="Right">
+                    <Label Content="{Binding ModelInfo.ModelPath}"
+                           Foreground="White"></Label>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+
+    </Grid>
+</Window>

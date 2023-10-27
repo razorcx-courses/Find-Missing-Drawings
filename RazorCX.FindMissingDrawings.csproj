@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD4572B3-9DA7-4FAA-8A6D-793C449486E9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RazorCX.FindMissingDrawings</RootNamespace>
+    <AssemblyName>RazorCX.FindMissingDrawings</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>RazorCX-Logo-50x50.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataGridSelectedItemsBlendBehavior.cs" />
+    <Compile Include="Models\DisplayOptions.cs" />
+    <Compile Include="Models\ExtensionMethods.cs" />
+    <Compile Include="Models\MissingDrawingFinder.cs" />
+    <Compile Include="Models\MissingDrawingFinderEventArgs.cs" />
+    <Compile Include="Models\PartSummary.cs" />
+    <Compile Include="Models\TeklaHandler.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\WebBrowserUtility.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF">
+      <Version>4.7.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls.WebView">
+      <Version>6.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Unity" Version="7.2.0.1367" />
+    <PackageReference Include="Tekla.Application.Library">
+      <Version>2023.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Tekla.Structures.Datatype">
+      <Version>2023.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Tekla.Structures.Plugins">
+      <Version>2023.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\OpenfileDialog_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RazorCX-Logo-50x50.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ProjectSystemModelRefresh_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Action_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ChangeQueryDeleteQuery_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ChangeQueryInsertResults_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ChangeQueryInsertValue_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DynamicValidator_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FindSymbol_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Graphics3D_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GreenCone_1024.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\greencone_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Label_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Save_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SaveTable_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Scaffold_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SelectCell_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SelectColumn_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SelectObject_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SwitchToDesignMode_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\transfer-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\video-player-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\video-player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\yellow cone_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\yellowcone_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Zoom_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RazorCX-Logo-50x50.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
